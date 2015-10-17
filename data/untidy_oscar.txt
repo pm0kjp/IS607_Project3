@@ -5741,7 +5741,7 @@ Face to Face -- Ingmar Bergman
 Network -- Sidney Lumet
 *	
 Rocky -- John G. Avildsen
-Seven Beauties -- Lina Wertmüller
+Seven Beauties -- Lina Wertmuller
 FILM EDITING
 All the President's Men -- Robert L. Wolfe
 Bound for Glory -- Robert Jones, Pembroke J. Herring
@@ -5795,7 +5795,7 @@ The Front -- Walter Bernstein
 *	
 Network -- Paddy Chayefsky
 Rocky -- Sylvester Stallone
-Seven Beauties -- Lina Wertmüller
+Seven Beauties -- Lina Wertmuller
 SPECIAL ACHIEVEMENT AWARD (Visual Effects)
 *	
 King Kong -- Carlo Rambaldi, Glen Robinson, Frank Van der Veer
