@@ -5332,7 +5332,7 @@ Sounder -- Lonne Elder, III
 WRITING (Story and Screenplay--based on factual material or material not previously published or produced)
 *	
 The Candidate -- Jeremy Larner
-The Discreet Charm of the Bourgeoisie -- Story and Screenplay by Luis Buñuel; in collaboration with Jean-Claude Carrière
+The Discreet Charm of the Bourgeoisie -- Story and Screenplay by Luis Bunuel; in collaboration with Jean-Claude Carriere
 Lady Sings the Blues -- Terence McCloy, Chris Clark, Suzanne de Passe
 Murmur of the Heart -- Louis Malle
 Young Winston -- Carl Foreman
@@ -6453,7 +6453,7 @@ Tootsie -- Fredric Steinkamp, William Steinkamp
 MAKEUP
 Gandhi -- Tom Smith
 *	
-Quest for Fire -- Sarah Monzani, Michèle Burke
+Quest for Fire -- Sarah Monzani, Michele Burke
 MUSIC (Original Score)
 *	
 E.T. The Extra-Terrestrial -- John Williams
@@ -6943,7 +6943,7 @@ The Mission -- Jim Clark
 Platoon -- Claire Simpson
 Top Gun -- Billy Weber, Chris Lebenzon
 MAKEUP
-The Clan of the Cave Bear -- Michael G. Westmore, Michèle Burke
+The Clan of the Cave Bear -- Michael G. Westmore, Michele Burke
 *	
 The Fly -- Chris Walas, Stephan Dupuis
 Legend -- Rob Bottin, Peter Robb-King
@@ -7229,7 +7229,7 @@ The Accidental Tourist -- Frank Galati, Lawrence Kasdan
 Dangerous Liaisons -- Christopher Hampton
 Gorillas in the Mist -- Screenplay by Anna Hamilton Phelan; Story by Anna Hamilton Phelan, Tab Murphy
 Little Dorrit -- Christine Edzard
-The Unbearable Lightness of Being -- Jean-Claude Carrière, Philip Kaufman
+The Unbearable Lightness of Being -- Jean-Claude Carriere, Philip Kaufman
 WRITING (Screenplay Written Directly for the Screen)
 Big -- Gary Ross, Anne Spielberg
 Bull Durham -- Ron Shelton
@@ -7425,7 +7425,7 @@ The Godfather, Part III -- Barry Malkin, Lisa Fruchtman, Walter Murch
 Good Fellas -- Thelma Schoonmaker
 The Hunt for Red October -- Dennis Virkler, John Wright
 MAKEUP
-Cyrano de Bergerac -- Michèle Burke, Jean-Pierre Eychenne
+Cyrano de Bergerac -- Michele Burke, Jean-Pierre Eychenne
 *	
 Dick Tracy -- John Caglione, Jr., Doug Drexler
 Edward Scissorhands -- Ve Neill, Stan Winston
@@ -7669,7 +7669,7 @@ Unforgiven -- Joel Cox
 MAKEUP
 Batman Returns -- Ve Neill, Ronnie Specter, Stan Winston
 *	
-Bram Stoker's Dracula -- Greg Cannom, Michèle Burke, Matthew W. Mungle
+Bram Stoker's Dracula -- Greg Cannom, Michele Burke, Matthew W. Mungle
 Hoffa -- Ve Neill, Greg Cannom, John Blake
 MUSIC (Original Score)
 *	
@@ -7697,7 +7697,7 @@ Aladdin -- Terry Porter, Mel Metcalfe, David J. Hudson, Doc Kane
 A Few Good Men -- Kevin O'Connell, Rick Kline, Bob Eber
 *	
 The Last of the Mohicans -- Chris Jenkins, Doug Hemphill, Mark Smith, Simon Kaye
-Under Siege -- Don Mitchell, Frank A. Montaño, Rick Hart, Scott Smith
+Under Siege -- Don Mitchell, Frank A. Montano, Rick Hart, Scott Smith
 Unforgiven -- Les Fresholtz, Vern Poore, Dick Alexander, Rob Young
 SOUND EFFECTS EDITING
 Aladdin -- Mark Mangini
@@ -7816,7 +7816,7 @@ The Remains of the Day -- Mike Nichols, John Calley and Ismail Merchant, Produce
 Schindler's List -- Steven Spielberg, Gerald R. Molen and Branko Lustig, Producers
 SOUND
 Cliffhanger -- Michael Minkler, Bob Beemer, Tim Cooney
-The Fugitive -- Donald O. Mitchell, Michael Herbick, Frank A. Montaño, Scott D. Smith
+The Fugitive -- Donald O. Mitchell, Michael Herbick, Frank A. Montano, Scott D. Smith
 Geronimo: An American Legend -- Chris Carpenter, D. M. Hemphill, Bill W. Benton, Lee Orloff
 *	
 Jurassic Park -- Gary Summers, Gary Rydstrom, Shawn Murphy, Ron Judkins
@@ -7937,7 +7937,7 @@ Pulp Fiction -- Lawrence Bender, Producer
 Quiz Show -- Robert Redford, Michael Jacobs, Julian Krainin and Michael Nozik, Producers
 The Shawshank Redemption -- Niki Marvin, Producer
 SOUND
-Clear and Present Danger -- Donald O. Mitchell, Michael Herbick, Frank A. Montaño, Arthur Rochester
+Clear and Present Danger -- Donald O. Mitchell, Michael Herbick, Frank A. Montano, Arthur Rochester
 Forrest Gump -- Randy Thom, Tom Johnson, Dennis Sands, William B. Kaplan
 Legends of the Fall -- Paul Massey, David Campbell, Christopher David, Douglas Ganton
 The Shawshank Redemption -- Robert J. Litt, Elliot Tyson, Michael Herbick, Willie Burton
@@ -8068,7 +8068,7 @@ Sense and Sensibility -- Lindsay Doran, Producer
 SOUND
 *	
 Apollo 13 -- Rick Dior, Steve Pederson, Scott Millan, David MacMillan
-Batman Forever -- Donald O. Mitchell, Frank A. Montaño, Michael Herbick, Petur Hliddal
+Batman Forever -- Donald O. Mitchell, Frank A. Montano, Michael Herbick, Petur Hliddal
 Braveheart -- Andy Nelson, Scott Millan, Anna Behlmer, Brian Simmons
 Crimson Tide -- Kevin O'Connell, Rick Kline, Gregory H. Watkins, William B. Kaplan
 Waterworld -- Steve Maslow, Gregg Landaker, Keith A. Wester
@@ -8548,7 +8548,7 @@ The Insider -- William Goldenberg, Paul Rubell, David Rosenbloom
 The Matrix -- Zach Staenberg
 The Sixth Sense -- Andrew Mondshein
 MAKEUP
-Austin Powers: The Spy Who Shagged Me -- Michèle Burke, Mike Smithson
+Austin Powers: The Spy Who Shagged Me -- Michele Burke, Mike Smithson
 Bicentennial Man -- Greg Cannom
 Life -- Rick Baker
 *	
@@ -8646,7 +8646,7 @@ CINEMATOGRAPHY
 *	
 Crouching Tiger, Hidden Dragon -- Peter Pau
 Gladiator -- John Mathieson
-Malèna -- Lajos Koltai
+Malena -- Lajos Koltai
 O Brother, Where Art Thou? -- Roger Deakins
 The Patriot -- Caleb Deschanel
 COSTUME DESIGN
@@ -8671,7 +8671,7 @@ Gladiator -- Pietro Scalia
 Traffic -- Stephen Mirrione
 Wonder Boys -- Dede Allen
 MAKEUP
-The Cell -- Michèle Burke, Edouard Henriques
+The Cell -- Michele Burke, Edouard Henriques
 *	
 Dr. Seuss' How the Grinch Stole Christmas -- Rick Baker, Gail Ryan
 Shadow of the Vampire -- Ann Buchanan, Amber Sibley
@@ -8680,7 +8680,7 @@ Chocolat -- Rachel Portman
 *	
 Crouching Tiger, Hidden Dragon -- Tan Dun
 Gladiator -- Hans Zimmer
-Malèna -- Ennio Morricone
+Malena -- Ennio Morricone
 The Patriot -- John Williams
 MUSIC (Original Song)
 "A Fool In Love" from Meet the Parents -- Music and Lyric by Randy Newman
@@ -9384,7 +9384,7 @@ Dreamgirls -- Sharen Davis
 Marie Antoinette -- Milena Canonero
 The Queen -- Consolata Boyle
 DIRECTING
-Babel -- Alejandro González Iñárritu
+Babel -- Alejandro González Inarritu
 *	
 The Departed -- Martin Scorsese
 Letters from Iwo Jima -- Clint Eastwood
@@ -9417,7 +9417,7 @@ MUSIC (Original Song)
 "Our Town" from Cars -- Music and Lyric by Randy Newman
 "Patience" from Dreamgirls -- Music by Henry Krieger; Lyric by Willie Reale
 BEST PICTURE
-Babel -- Alejandro González Iñárritu, Jon Kilik and Steve Golin, Producers
+Babel -- Alejandro González Inarritu, Jon Kilik and Steve Golin, Producers
 *	
 The Departed -- Graham King, Producer
 Letters from Iwo Jima -- Clint Eastwood, Steven Spielberg and Robert Lorenz, Producers
@@ -9682,7 +9682,7 @@ The Dark Knight -- Lora Hirschberg, Gary Rizzo and Ed Novick
 *	
 Slumdog Millionaire -- Ian Tapp, Richard Pryke and Resul Pookutty
 WALL-E -- Tom Myers, Michael Semanick and Ben Burtt
-Wanted -- Chris Jenkins, Frank A. Montaño and Petr Forejt
+Wanted -- Chris Jenkins, Frank A. Montano and Petr Forejt
 VISUAL EFFECTS
 *	
 The Curious Case of Benjamin Button -- Eric Barba, Steve Preeg, Burt Dalton and Craig Barron
@@ -9996,7 +9996,7 @@ The Artist -- Production Design: Laurence Bennett; Set Decoration: Robert Gould
 Harry Potter and the Deathly Hallows Part 2 -- Production Design: Stuart Craig; Set Decoration: Stephenie McMillan
 *	
 Hugo -- Production Design: Dante Ferretti; Set Decoration: Francesca Lo Schiavo
-Midnight in Paris -- Production Design: Anne Seibel; Set Decoration: Hélène Dubreuil
+Midnight in Paris -- Production Design: Anne Seibel; Set Decoration: Helene Dubreuil
 War Horse -- Production Design: Rick Carter; Set Decoration: Lee Sandales
 CINEMATOGRAPHY
 The Artist -- Guillaume Schiffman
@@ -10398,7 +10398,7 @@ Maleficent -- Anna B. Sheppard
 Mr. Turner -- Jacqueline Durran
 DIRECTING
 *	
-Birdman or (The Unexpected Virtue of Ignorance) -- Alejandro G. Iñárritu
+Birdman or (The Unexpected Virtue of Ignorance) -- Alejandro G. Inarritu
 Boyhood -- Richard Linklater
 Foxcatcher -- Bennett Miller
 The Grand Budapest Hotel -- Wes Anderson
@@ -10432,7 +10432,7 @@ MUSIC (Original Song)
 BEST PICTURE
 American Sniper -- Clint Eastwood, Robert Lorenz, Andrew Lazar, Bradley Cooper and Peter Morgan, Producers
 *	
-Birdman or (The Unexpected Virtue of Ignorance) -- Alejandro G. Iñárritu, John Lesher and James W. Skotchdopole, Producers
+Birdman or (The Unexpected Virtue of Ignorance) -- Alejandro G. Inarritu, John Lesher and James W. Skotchdopole, Producers
 Boyhood -- Richard Linklater and Cathleen Sutherland, Producers
 The Grand Budapest Hotel -- Wes Anderson, Scott Rudin, Steven Rales and Jeremy Dawson, Producers
 The Imitation Game -- Nora Grossman, Ido Ostrowsky and Teddy Schwarzman, Producers
@@ -10455,9 +10455,9 @@ Interstellar -- Richard King
 Unbroken -- Becky Sullivan and Andrew DeCristofaro
 SOUND MIXING
 American Sniper -- John Reitz, Gregg Rudloff and Walt Martin
-Birdman or (The Unexpected Virtue of Ignorance) -- Jon Taylor, Frank A. Montaño and Thomas Varga
+Birdman or (The Unexpected Virtue of Ignorance) -- Jon Taylor, Frank A. Montano and Thomas Varga
 Interstellar -- Gary A. Rizzo, Gregg Landaker and Mark Weingarten
-Unbroken -- Jon Taylor, Frank A. Montaño and David Lee
+Unbroken -- Jon Taylor, Frank A. Montano and David Lee
 *	
 Whiplash -- Craig Mann, Ben Wilkins and Thomas Curley
 VISUAL EFFECTS
@@ -10476,7 +10476,7 @@ The Theory of Everything -- Screenplay by Anthony McCarten
 Whiplash -- Written by Damien Chazelle
 WRITING (Original Screenplay)
 *	
-Birdman or (The Unexpected Virtue of Ignorance) -- Written by Alejandro G. Iñárritu, Nicolás Giacobone, Alexander Dinelaris, Jr. & Armando Bo
+Birdman or (The Unexpected Virtue of Ignorance) -- Written by Alejandro G. Inarritu, Nicolás Giacobone, Alexander Dinelaris, Jr. & Armando Bo
 Boyhood -- Written by Richard Linklater
 Foxcatcher -- Written by E. Max Frye and Dan Futterman
 The Grand Budapest Hotel -- Screenplay by Wes Anderson; Story by Wes Anderson & Hugo Guinness
