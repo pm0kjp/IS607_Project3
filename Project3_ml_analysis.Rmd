@@ -1,0 +1,63 @@
+---
+title: "Project 3"
+author: "Team members of Section 2"
+date: "October 19, 2015"
+output: html_document
+---
+
+### Project statement
+
+This is a group project and we use Oscar Academy Awards data to determine whether Best Film Editing is the best predictor of Best Picture.
+
+### Data set
+
+The input data is from [link](https://github.com/aagoldberg/IS607/blob/master/tidedoscarwinners.csv). The 1's indicate winning the award, 0's indicate not winning.
+
+### Techniques Used
+1. Random Rorests
+2. Training and Testing
+3. Confusion Matrix
+
+### Loading the data
+
+```{r}
+library(XML)
+oscar_data <- readHTMLTable('tidedoscarwinners.csv.html')
+oscar_data <- oscar_data[[1]]
+head(oscar_data)
+```
+
+### Data cleaning
+
+```{r}
+oscar_data_ml <- oscar_data[,-c(1:4)]
+head(oscar_data_ml)
+dim(oscar_data_ml)
+str(oscar_data_ml)
+```
+
+### Data Analysis
+
+```{r}
+library(lattice)
+library(ggplot2)
+library(caret)
+set.seed(45)
+inTrain <- createDataPartition(y=oscar_data_ml$Best_Picture, p=0.7,list=FALSE)
+training <- oscar_data_ml[inTrain,]
+testing <- oscar_data_ml[-inTrain,]
+dim(training)
+dim(testing)
+library(randomForest)
+model <- randomForest(Best_Picture ~., data=training)
+model
+importance(model)
+library(caret)
+predicted <- predict(model, testing)
+table(predicted)
+library(e1071)
+confusionMatrix(predicted, testing$Best_Picture)
+```
+
+### Conclusion
+With this dataset, Random forests provide a nice model to predict whether movie wins Best Picture or not. From the model, we can see Best_Directing is the strongest predictor, and Best_Editing is the next. 
