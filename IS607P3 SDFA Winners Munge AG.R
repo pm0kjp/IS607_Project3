@@ -2,16 +2,19 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-sddat <- read.csv("https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/SDFilmAwards.csv", strip.white = TRUE, header=TRUE, sep=",")
-
+sddat <- read.csv("C:/Users/Andrew/Documents/GitHub/IS607_Project3/data/SDFilmAwards.csv", strip.white = TRUE, header=TRUE, sep=",")
 sddat[,1:4] <- lapply(sddat[,1:4], trimws) #trim fore and aft white spaces (strip.white didn't work very well in read.csv)
 
+sddat
+sdtable <- sddat %>% #tidy and re-form data for analysis
+  select(Award, Year, Movie) %>%
+  spread(Award, Award) %>%
+  separate(Year, c("Year", "Tie"), 5) %>%
+  select(Year, Movie, `Best Actor`, `Best Actress`, `Best Film`, Cinemtography, Directors, Editing)
 
-baftatable <- baftadat %>% #tidy and re-form data for analysis
-  gather("best_picture","pictures", 2:3) %>%
-  filter(pictures !="NA") %>%
-  mutate(best_picture = 1)
+sdtable[,3:8][sdtable[,3:8] != "NA"] <- 1 #mark winners as 1's
+sdtable[,3:8][is.na(sdtable[,3:8])] <- 0 #mark non-winners as 0's
+colnames(sdtable) <- c("year", "movie", "best_actor", "best_actress", "best_film", "best_cinematography", "best_director", "best_editing")
 
-write.csv(baftatable, file = "tidybaftabestpicturewinners.csv")
+write.csv(sdtable, file = "tidysdfcsawinners.csv")
 
-head(sddat)
