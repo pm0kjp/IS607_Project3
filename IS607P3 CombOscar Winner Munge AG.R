@@ -22,6 +22,5 @@ comboscartab[,3:21][comboscartab[,3:21] == "Yes"] <- 1 #mark winners as 1's
 comboscartab[,3:21][comboscartab[,3:21] == "NO"] <- 2 #mark losing nominees as 2's
 comboscartab[,3:21][comboscartab[,3:21] == "No"] <- 2 #mark losing nominees as 2's
 comboscartab[,3:21][is.na(comboscartab[,3:21])] <- 0 #mark non-nomiees as 0's
-comboscartab <- comboscartab[2:21]
-head(comboscartab[2:21], 10)
+head(comboscartab, 10)
 write.csv(comboscartab, file = "tidyoscarnoms.csv")
