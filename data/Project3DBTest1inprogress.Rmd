@@ -91,6 +91,13 @@ Work on Oscar_Award_Type data frame
 oscar_award_type <- as.data.frame(oscar_data$Winner, stringsAsFactors = FALSE)
 names(oscar_award_type)[names(oscar_award_type)=="oscar_data$Winner"] <- "award_type_name"  ## rename column to match EEP design
 oscar_award_type <- distinct(oscar_award_type) # elimininate copies of yes or no
-
+oscar_award_type$award_type_name <- str_replace_all(oscar_award_type$award_type_name, "No", "Nominee")
+oscar_award_type$award_type_name <- str_replace_all(oscar_award_type$award_type_name, "NO", "Nominee")
+oscar_award_type$award_type_name <- str_replace_all(oscar_award_type$award_type_name, "Yes", "Winner")
+oscar_award_type$award_type_name <- str_replace_all(oscar_award_type$award_type_name, "YES", "Winner")
+oscar_award_type <- distinct(oscar_award_type) # elimininate copies of Winner or Nominee
+oscar_award_type$award_type_id <- 0
+oscar_award_type$award_type_id[2] <- 1
+oscar_award_type$oscar_nom_or_win <- 1
 ```
 
