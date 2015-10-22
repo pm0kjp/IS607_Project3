@@ -1,0 +1,96 @@
+---
+title: "Untitled"
+author: "KarenWeigandt"
+date: "October 21, 2015"
+output: html_document
+---
+
+Load necessary packages
+```{r}
+library(tidyr)
+library(dplyr)
+library(stringr)
+```
+
+Load Oscar data
+```{r}
+oscar_data <- read.csv("https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/Oscar_data.csv", stringsAsFactors = FALSE) ## latest tidied oscar data includes nominees
+names(oscar_data)[names(oscar_data)=="Nominee"] <- "Movie" ## rename column
+oscar_data$Movie[] <- trimws(oscar_data$Movie[]) ##get rid of white spaces at end that cause duplicates
+oscar_data$Award[] <- trimws(oscar_data$Award[])
+```
+
+Work on list of Oscar films
+```{r}
+oscar_movie <- as.data.frame(oscar_data$Movie, stringsAsFactors = FALSE)
+oscar_movie <- distinct(oscar_movie) # elimininate copies of the same movie
+names(oscar_movie)[names(oscar_movie)=="oscar_data$Movie"] <- "film_title"  ## rename column to match EEP design
+oscar_movie$oscar_nom_or_win <- 1
+```
+
+Work on list of Bafta films
+```{r}
+bafta_data <- read.csv("https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/tidybaftabestpicturewinners.csv", stringsAsFactors = FALSE)
+bafta_data$pictures[] <- trimws(bafta_data$pictures[]) ##get rid of white spaces at end that cause duplicates
+
+bafta_movie <- as.data.frame(bafta_data$pictures, stringsAsFactors = FALSE)
+names(bafta_movie)[names(bafta_movie)=="bafta_data$pictures"] <- "film_title"  ## rename column to match EEP design
+bafta_movie$bafta_best_pic_win <- 1
+```
+
+Join Oscar and bafta films
+```{r}
+oscar_and_bafta_movies <- dplyr::full_join(oscar_movie, bafta_movie, by = "film_title")
+```
+
+
+Work on list of SDFilm films
+```{r}
+sdfilm_data <- read.csv("https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/SDFilmAwards.csv", stringsAsFactors = FALSE)
+sdfilm_data$Movie[] <- trimws(sdfilm_data$Movie[]) ##get rid of white spaces at end that cause duplicates
+
+
+sdfilm_movie <- as.data.frame(sdfilm_data$Movie, stringsAsFactors = FALSE)
+sdfilm_movie <- distinct(sdfilm_movie) # elimininate copies of the same movie
+names(sdfilm_movie)[names(sdfilm_movie)=="sdfilm_data$Movie"] <- "film_title"  ## rename column to match EEP design
+sdfilm_movie$sdfilm_award_win <- 1
+
+```
+
+Join SDfilm movies with previously joined Oscar and bafta films to create Film Table for database, then add film id to the data frame
+```{r}
+## join data frames
+Film <- dplyr::full_join(oscar_and_bafta_movies, sdfilm_movie, by = "film_title")
+## Put in alphabetical order
+Film <- dplyr::arrange(Film, film_title)
+## Change NAs to 0
+Film$oscar_nom_or_win[is.na(Film$oscar_nom_or_win)]<-0
+Film$bafta_best_pic_win[is.na(Film$bafta_best_pic_win)]<-0
+Film$sdfilm_award_win[is.na(Film$sdfilm_award_win)]<-0
+
+Film$film_id <- 1 ## Add column
+Film$film_id <-seq.int(nrow(Film)) ## fill with category id integers
+
+```
+Film data frame complete
+
+Work on Oscar_Award_Category dataframe
+```{r}
+## Separate out the awards
+oscar_award <- as.data.frame(oscar_data$Award, stringsAsFactors = FALSE)
+oscar_award <- distinct(oscar_award) # elimininate copies of the same award
+names(oscar_award)[names(oscar_award)=="oscar_data$Award"] <- "award_category_name"  ## rename column to match EEP design
+oscar_award$award_category_id <- 1 ## Add column
+oscar_award$award_category_id <-seq.int(nrow(oscar_award)) ## fill with category id integers
+oscar_award$oscar_nom_or_win <- 1
+```
+Oscar_Award_Category data frame complete
+
+Work on Oscar_Award_Type data frame
+```{r}
+oscar_award_type <- as.data.frame(oscar_data$Winner, stringsAsFactors = FALSE)
+names(oscar_award_type)[names(oscar_award_type)=="oscar_data$Winner"] <- "award_type_name"  ## rename column to match EEP design
+oscar_award_type <- distinct(oscar_award_type) # elimininate copies of yes or no
+
+```
+
