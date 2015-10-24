@@ -26,6 +26,7 @@ Research into the history and methods of the Oscars allowed us to create an [Aca
 - A [list of levels of recognition](Academy%20Award%20Metadata/Oscar_Award_Type.csv)
 
 Screen-scraping methods using R libraries were used, including the following scripts:
+- BAFTA(https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film) and PGA Award (https://en.wikipedia.org/wiki/Producers_Guild_of_America_Award) information was originally manually scaped from the referenced pages.
 - Add your data and info about screen scraping here!
 - More scripts about screen scraping here.
 - Create a folder and add your scripts!
