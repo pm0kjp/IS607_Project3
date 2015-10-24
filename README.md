@@ -51,3 +51,9 @@ Some screenshots for our presentation can be found in the [Images for Presentati
 ##Findings
 
 Our team discovered that Best Editing is in fact not the best predictor of Best Picture.  Putting our efforts solely into the analysis of the Academy Award data and not (at this point) including other film awards, we discerned that Best Director is in fact the best predictor of Best Picture.
+
+##Future Directions
+
+Given that we've pulled data from other awards sources, a logical next step would be to include this data in our analysis and machine learning in order to determine if some combination of awards (either a single factor or a combination of several) could be a still more accurate predictor than Best Director.  Additionally, a future direction could be a more robust project management model using tools like Slack.
+
+
