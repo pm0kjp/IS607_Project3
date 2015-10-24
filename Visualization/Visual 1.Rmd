@@ -1,0 +1,85 @@
+---
+title: "Visualization 1 Project 3"
+author: "Nabila Hossain"
+date: "October 20, 2015"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+Oscar_table <- read.csv(file="https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/tidy_oscar_winners.csv", header=TRUE, sep=",")
+head(Oscar_table, 3)
+```
+
+Table that has only the information about all the movies that won best picture, best editing or did not win either of them.
+```{r}
+Oscar_tsub <- data.frame(Oscar_table[c(2:6)])
+head(Oscar_tsub)
+```
+
+
+
+```{r}
+wp_we <- subset(Oscar_tsub, Best_Picture == 1 & Best_Editing == 1 & Best_Directing == 0) #Years the movie that BOTH best picture and editing, but not directing.
+lp_we <- subset(Oscar_tsub, Best_Picture == 0 & Best_Editing == 1 & Best_Directing == 0) # Years the movie won ONLY best editing but NOT best Picture or directing.
+wp_wd <- subset(Oscar_tsub, Best_Picture == 1 & Best_Editing ==0 & Best_Directing != 0) # Years the movie won best directing & best picture but NOT best editing.
+lp_wd <- subset(Oscar_tsub, Best_Picture == 0 & Best_Editing == 0 & Best_Directing == 1) # Years the movie ONLY won best directing but NOT best editing & best picture.
+wp_we_wd <- subset(Oscar_tsub, Best_Picture == 1 & Best_Editing != 0 & Best_Directing != 0) #Years the movie won best picture, best directing and best editing.
+lp_we_wd <- subset(Oscar_tsub, Best_Picture == 0 & Best_Editing != 0 & Best_Directing != 0) #Years the movie won best directing and best editing but NOT best picture.
+wp_le_ld <- subset(Oscar_tsub, Best_Picture == 1 & Best_Editing == 0 & Best_Directing == 0) #Years the movie won best picture but NOT best directing and best editing.
+
+
+x = as.character(c("Won Only Best Editing", "Won Only Best Directing", "Won Both Best Editing and Directing", "Lost Both Editing and Directing"))
+Won_Best_Picture = as.numeric(c(nrow(wp_we), nrow(wp_wd), nrow(wp_we_wd), nrow(wp_le_ld)))
+Lost_Best_Picture = as.numeric(c(nrow(lp_we), nrow(lp_wd), nrow(lp_we_wd), 0))
+ct <- data.frame(x, Won_Best_Picture, Lost_Best_Picture)
+colnames(ct)[1] <- ""
+ct
+```
+
+```{r}
+library(knitr)
+kable(ct, align = "c", caption = "Summary of Oscars' winners for best picture, editing and directing.") 
+```
+
+```{r, warning=FALSE}
+ct1 <- ct %>% t() %>% data.frame()
+ct1 <- cbind(Best_Picture = rownames(ct1), ct1)
+rownames(ct1) <- NULL
+colnames(ct1)[2:5] <- x
+ct1 <- ct1[-1,]
+ct2 <- ct1 %>% gather("Award", "Number_of_Years", 2:5)
+ct2$Number_of_Years <- as.numeric(format(ct2$Number_of_Years))
+
+
+library(ggplot2)
+
+#Bar Graph1:
+ggplot(data = ct2, aes(y = Number_of_Years, x =Best_Picture, fill=Award)) + geom_bar(stat="identity", position="dodge") + scale_x_discrete(breaks=c("Lost_Best_Picture", "Won_Best_Picture"), labels=c("Lost", "Won")) + theme(legend.position = "bottom") + ggtitle("Graph 1") 
+
+#Bar Graph2:
+ggplot(data = ct2, aes(y = Number_of_Years, x = Award, fill=Best_Picture)) + geom_bar(stat="identity", position="dodge") + coord_cartesian(ylim = c(0, 45)) + ggtitle("Graph")+ theme(axis.text.x  = element_text(angle=15, vjust=.8))
+
+#Finding the percentages for pie chart 
+ct3 <- ct2 %>% subset(Best_Picture=="Won_Best_Picture") %>% mutate( Percent_of_Years = (Number_of_Years / 81)* 100 ) %>% data.frame()
+kable(ct3, digits = 2, align = "c", caption = "Table 2")
+
+#Pie Chart:
+ggplot(data = ct3, aes(y = Percent_of_Years, x = "", fill=Award)) + geom_bar(stat = "identity", color = 'black') + coord_polar(theta="y") + ggtitle("        Percentage Best Picture Winners Having Other Awards") + guides(fill=guide_legend(override.aes=list(colour=NA)))
+```
+
+```{r}
+#Scatter Plot1
+Oscar_table2 <- read.csv(file="https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/Combo_Oscar.csv", header=TRUE, sep=",")
+
+ggplot(data = Oscar_table2, aes(y = Best_Editing, x = Best_Picture))+ geom_point(aes(color = Year)) + theme(legend.position = "bottom")
+
+#Scatter Plot2
+ggplot(data = Oscar_table2, aes(y = Best_Directing, x = Best_Picture))+ geom_point(aes(color = Year)) + theme(legend.position = "bottom")
+
+
+```
+
+
