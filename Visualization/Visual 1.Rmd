@@ -5,23 +5,20 @@ date: "October 20, 2015"
 output: html_document
 ---
 
-```{r}
+```{r, warning=FALSE}
 library(dplyr)
 library(tidyr)
+library(ggplot2)
+library(ggthemes)
 
 Oscar_table <- read.csv(file="https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/tidy_oscar_winners.csv", header=TRUE, sep=",")
-head(Oscar_table, 3)
+
 ```
 
 Table that has only the information about all the movies that won best picture, best editing or did not win either of them.
 ```{r}
 Oscar_tsub <- data.frame(Oscar_table[c(2:6)])
-head(Oscar_tsub)
-```
 
-
-
-```{r}
 wp_we <- subset(Oscar_tsub, Best_Picture == 1 & Best_Editing == 1 & Best_Directing == 0) #Years the movie that BOTH best picture and editing, but not directing.
 lp_we <- subset(Oscar_tsub, Best_Picture == 0 & Best_Editing == 1 & Best_Directing == 0) # Years the movie won ONLY best editing but NOT best Picture or directing.
 wp_wd <- subset(Oscar_tsub, Best_Picture == 1 & Best_Editing ==0 & Best_Directing != 0) # Years the movie won best directing & best picture but NOT best editing.
@@ -33,10 +30,10 @@ wp_le_ld <- subset(Oscar_tsub, Best_Picture == 1 & Best_Editing == 0 & Best_Dire
 
 x = as.character(c("Won Only Best Editing", "Won Only Best Directing", "Won Both Best Editing and Directing", "Lost Both Editing and Directing"))
 Won_Best_Picture = as.numeric(c(nrow(wp_we), nrow(wp_wd), nrow(wp_we_wd), nrow(wp_le_ld)))
-Lost_Best_Picture = as.numeric(c(nrow(lp_we), nrow(lp_wd), nrow(lp_we_wd), 0))
+Lost_Best_Picture = as.numeric(c(nrow(lp_we), nrow(lp_wd), nrow(lp_we_wd), "NA"))
 ct <- data.frame(x, Won_Best_Picture, Lost_Best_Picture)
 colnames(ct)[1] <- ""
-ct
+
 ```
 
 ```{r}
@@ -54,31 +51,29 @@ ct2 <- ct1 %>% gather("Award", "Number_of_Years", 2:5)
 ct2$Number_of_Years <- as.numeric(format(ct2$Number_of_Years))
 
 
-library(ggplot2)
-
 #Bar Graph1:
-ggplot(data = ct2, aes(y = Number_of_Years, x =Best_Picture, fill=Award)) + geom_bar(stat="identity", position="dodge") + scale_x_discrete(breaks=c("Lost_Best_Picture", "Won_Best_Picture"), labels=c("Lost", "Won")) + theme(legend.position = "bottom") + ggtitle("Graph 1") 
+ggplot(data = ct2, aes(y = Number_of_Years, x =Best_Picture, fill=Award)) + geom_bar(stat="identity", position="dodge") + theme_hc(bgcolor = "darkunica") + scale_x_discrete(breaks=c("Lost_Best_Picture", "Won_Best_Picture"), labels=c("Lost", "Won")) + ylab("Years") + xlab("Best Pictures") + scale_fill_discrete(name="Best Editing/\nDirecting", breaks=c("Won Only Best Editing", "Won Only Best Directing", "Won Both Best Editing and Directing", "Lost Both Editing and Directing"), labels=c("Won Only Best Editing", "Won Only Best Directing", "Won Both", "Lost Both")) + ggtitle("Best Pictures Vs Best Editing and Directing Picture") + theme(legend.position = "top")
 
 #Bar Graph2:
-ggplot(data = ct2, aes(y = Number_of_Years, x = Award, fill=Best_Picture)) + geom_bar(stat="identity", position="dodge") + coord_cartesian(ylim = c(0, 45)) + ggtitle("Graph")+ theme(axis.text.x  = element_text(angle=15, vjust=.8))
+ggplot(data = ct2, aes(y = Number_of_Years, x = Award, fill=Best_Picture)) + geom_bar(stat="identity", position="dodge")  + theme_hc(bgcolor = "darkunica") + coord_cartesian(ylim = c(0, 45)) + ggtitle("Best Editing and Directing Pictures Vs Best Pictures")+ theme(axis.text.x  = element_text(angle=10, vjust=.9, hjust=.6)) + theme(legend.position = "top") +  scale_fill_discrete(name="Best Picture", labels=c("Lost", "Won")) + ylab("Years") + xlab("Best Editing/Directing") 
 
 #Finding the percentages for pie chart 
 ct3 <- ct2 %>% subset(Best_Picture=="Won_Best_Picture") %>% mutate( Percent_of_Years = (Number_of_Years / 81)* 100 ) %>% data.frame()
 kable(ct3, digits = 2, align = "c", caption = "Table 2")
 
 #Pie Chart:
-ggplot(data = ct3, aes(y = Percent_of_Years, x = "", fill=Award)) + geom_bar(stat = "identity", color = 'black') + coord_polar(theta="y") + ggtitle("        Percentage Best Picture Winners Having Other Awards") + guides(fill=guide_legend(override.aes=list(colour=NA)))
+ggplot(data = ct3, aes(y = Percent_of_Years, x = "", fill=Award)) + geom_bar(stat = "identity", color = 'black') + coord_polar(theta="y") + ggtitle("Percentage of Best Picture Winners Having\nBest Directing and Best Editing Awards.") + scale_fill_discrete(name="Best Editing/Directing", breaks=c("Won Only Best Editing", "Won Only Best Directing", "Won Both Best Editing and Directing", "Lost Both Editing and Directing"), labels=c("Won Only Best Editing", "Won Only Best Directing", "Won Both", "Lost Both")) + guides(fill=guide_legend(override.aes=list(colour=NA))) + theme_igray() + theme(legend.position = "left") + ylab("Won Best Pictures")
 ```
+
 
 ```{r}
 #Scatter Plot1
 Oscar_table2 <- read.csv(file="https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/Combo_Oscar.csv", header=TRUE, sep=",")
 
-ggplot(data = Oscar_table2, aes(y = Best_Editing, x = Best_Picture))+ geom_point(aes(color = Year)) + theme(legend.position = "bottom")
+ggplot(data = Oscar_table2, aes(y = Best_Editing, x = Best_Picture))+ geom_point(aes(color = Year)) + theme_igray() + ggtitle("Oscar's Winners Best Picture Vs Best Editing") + ylab("Won Best Editing Pictures") + xlab("Won Best Pictures") + theme(axis.text.x = element_blank(), axis.text.y = element_blank()) 
 
 #Scatter Plot2
-ggplot(data = Oscar_table2, aes(y = Best_Directing, x = Best_Picture))+ geom_point(aes(color = Year)) + theme(legend.position = "bottom")
-
+ggplot(data = Oscar_table2, aes(y = Best_Directing, x = Best_Picture))+ geom_point(aes(color = Year)) + theme_igray() + ggtitle("Oscar's Winners Best Picture Vs Best Directing") + ylab("Won Best Directing Pictures") + xlab("Won Best Pictures") + scale_y_discrete(labels=abbreviate) + scale_x_discrete(labels=abbreviate) + theme(axis.text.x= element_text(angle=90)) 
 
 ```
 
