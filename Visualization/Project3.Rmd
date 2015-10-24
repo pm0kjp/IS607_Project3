@@ -1,0 +1,109 @@
+---
+title: "Project 3: Oscar Wins Charts"
+author: "Skrelja"
+date: "October 23, 2015"
+output: html_document
+---
+
+# OSCAR WINS
+
+```{r}
+library(stringr)
+library(ggplot2)
+
+oscar<-read.table('https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/Combo_Oscar.csv',header=TRUE,sep=",",quote="\"",stringsAsFactors = FALSE)
+
+oscar<-data.frame(oscar)
+
+oscar[is.na(oscar)] <- ""
+
+#CHART 1: BP Overlaps
+BP_BE<-str_trim(oscar$Best_Picture)==str_trim(oscar$Best_Editing)
+BP_BD<-str_trim(oscar$Best_Picture)==str_trim(oscar$Best_Directing)
+BP_BA<-str_trim(oscar$Best_Picture)==str_trim(oscar$Best_Actor)
+BP_BSA<-str_trim(oscar$Best_Picture)==str_trim(oscar$Best_Supporting_Actor)
+BP_BAC<-str_trim(oscar$Best_Picture)==str_trim(oscar$Best_Actress)
+BP_BSAC<-str_trim(oscar$Best_Picture)==str_trim(oscar$Best_Supporting_Actress)
+BP_BS<-str_trim(oscar$Best_Picture)==str_trim(oscar$Best_Sound)
+BP_BSG<-str_trim(oscar$Best_Picture)==str_trim(oscar$Best_Song)
+
+df<-data.frame(BP_BE,BP_BD,BP_BA,BP_BSA,BP_BAC,BP_BSAC,BP_BS,BP_BSG)  #Create dataframe of BP Overlaps
+
+count_doubles<-data.frame(names(df),apply(df,2,sum))   #Counts BP overlaps.
+names(count_doubles)<-c("Overlap","Count")
+
+ggplot(data=count_doubles,aes(x=Overlap,y=Count,fill=Overlap))+geom_bar(stat='identity')+ggtitle('Chart 1: BP overlaps most with BD, followed by BE and BA.')
+
+#CHART 2: BE Overlaps
+BE_BP<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Picture)
+BE_BD<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Directing)
+BE_BA<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Actor)
+BE_BSA<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Supporting_Actor)
+BE_BAC<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Actress)
+BE_BSAC<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Supporting_Actress)
+BE_BS<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Sound)
+BE_BSG<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Song)
+
+df2<-data.frame(BE_BP,BE_BD,BE_BA,BE_BSA,BE_BAC,BE_BSAC,BE_BS,BE_BSG)    #Create dataframe of BE Overlaps
+
+count_doubles2<-data.frame(names(df2),apply(df2,2,sum))  #Counts BE overlaps.
+names(count_doubles2)<-c("Overlap","Count")
+
+ggplot(data = count_doubles2,aes(x=Overlap,y=Count,fill=Overlap))+geom_bar(stat = 'identity')+ggtitle('Chart 2: BE overlaps most with BD, followed by BP and BS.')
+
+#CHART 3: BP Total Wins
+BP_totalwins<-data.frame(oscar$Year,apply(df,1,sum))   #Counts Total Wins
+names(BP_totalwins)<-c("Year","Wins")
+
+BP_totalwins$Wins<-BP_totalwins$Wins+1  #Adds back BP
+
+ggplot(data = BP_totalwins,aes(x=Year,y=Wins))+geom_bar(stat = 'identity')+ggtitle('Chart 3: Total BP Awards; Averages 3.3 awards; Is BE one of them?')
+
+#CHART 4: Distribution of BP Total Wins
+
+hist(BP_totalwins$Wins,xlab="Number of Awards Per Year",main="Chart 4: Distribution of Total Awards Won By BP; Looks Normal.")
+summary(BP_totalwins$Wins)
+```
+
+# OSCAR NOMINATIONS
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+oscar_noms<-read.csv('https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/tidyoscarnoms.csv',header=TRUE,sep=",")
+
+#NOTE: LISTS ALL NOMINATED MOVIES; 19 CATEGORIES; 0=NOT NOMINATED, 1=WON OSCAR, 2=LOST OSCAR
+
+#CHART 5: BP Win vs. Nomination (win or lose)
+BP_LACTOR <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & actor.in.a.leading.role>0)
+BP_SACTOR <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & actor.in.a.supporting.role>0)
+BP_LACTRESS <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & actress.in.a.leading.role>0)
+BP_SACTRESS <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & actress.in.a.supporting.role>0)
+BP_ART <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & art.direction>0)
+BP_CINEMA <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & cinematography>0)
+BP_COSTUME <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & costume.design>0)
+BP_DIRECTING <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & directing>0)
+BP_FILMEDITING <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & film.editing>0)
+BP_MAKEUP <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & makeup>0)
+BP_MUSICSCORE <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & music..score.>0)
+BP_MUSICSONG <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & music..song.>0)
+BP_SOUNDEDITING <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & sound.editing>0)
+BP_SOUNDMIXING <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & sound.mixing>0)
+BP_VISUALEFF <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & visual.effects>0)
+BP_WRTG <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & writing>0)
+BP_WRTGADPTSPLAY <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & writing..adapted.screenplay.>0)
+BP_WRTGORIGSPLAY <- oscar_noms %>% group_by(Year) %>% filter(best.picture==1 & writing..original.screenplay.>0)
+
+overlap_counts<-data.frame(c('BP_LACTOR','BP_SACTOR','BP_LACTRESS','BP_SACTRESS','BP_ART',
+                             'BP_CINEMA','BP_COSTUME','BP_DIRECTING','BP_FILMEDITING','BP_MAKEUP',
+                             'BP_MUSICSCORE','BP_MUSICSONG','BP_SOUNDEDITING','BP_SOUNDMIXING','BP_VISUALEFF',
+                             'BP_WRTG','BP_WRTGADPTSPLAY','BP_WRTGORIGSPLAY'),
+                           c(nrow(BP_LACTOR),nrow(BP_SACTOR),nrow(BP_LACTRESS),nrow(BP_SACTRESS),nrow(BP_ART),                                                                                   nrow(BP_CINEMA),nrow(BP_COSTUME),nrow(BP_DIRECTING),nrow(BP_FILMEDITING),nrow(BP_MAKEUP),
+                             nrow(BP_MUSICSCORE),nrow(BP_MUSICSONG),nrow(BP_SOUNDEDITING),nrow(BP_SOUNDMIXING),nrow(BP_VISUALEFF),
+                             nrow(BP_WRTG),nrow(BP_WRTGADPTSPLAY),nrow(BP_WRTGORIGSPLAY)))
+
+names(overlap_counts)<-c('Overlap','Counts')
+
+ggplot(data=overlap_counts,aes(x=Overlap,y=Counts,fill=Overlap))+geom_bar(stat = 'identity')+ggtitle('Chart 5: BP Overlaps Most with Noms for Directing, Editing and Lead Actor')+theme(legend.position="none", axis.text.x = element_text(angle = 90, hjust = 1))
+```
