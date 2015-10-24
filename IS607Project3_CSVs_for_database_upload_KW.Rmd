@@ -1,0 +1,166 @@
+---
+title: "Create CSVs for database upload - Film, Oscar_Award_Type, Oscar_Award_Category and Film_Oscar_Award"
+author: "KarenWeigandt"
+date: "October 21, 2015"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    theme: cerulean
+---
+### Introduction
+Goal: To create .csv files for upload into the MySQL database for the following tables -  Film, Oscar_Award_Type, Oscar_Award_Category and Film_Oscar_Award.
+#### IS 607 Section 2 Team is awesome.
+
+
+### Load necessary packages
+```{r}
+library(tidyr)
+library(dplyr)
+library(stringr)
+```
+
+### Load Oscar data
+```{r}
+oscar_data <- read.csv("https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/tidyoscarnoms.csv", stringsAsFactors = FALSE)
+names(oscar_data)[names(oscar_data)=="Nominee"] <- "Movie" ## rename column
+```
+
+### Work on list of Oscar films
+```{r}
+## Create data frame with film titles
+oscar_movie <- as.data.frame(oscar_data$Movie, stringsAsFactors = FALSE)
+names(oscar_movie)[names(oscar_movie)=="oscar_data$Movie"] <- "film_title"  ## rename column to match EEP design
+```
+
+### Work on list of Bafta films
+```{r}
+bafta_data <- read.csv("https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/tidybaftabestpicturewinners.csv", stringsAsFactors = FALSE)
+bafta_data$pictures[] <- trimws(bafta_data$pictures[]) ##get rid of white spaces at end that cause duplicates
+
+## Create data frame with film titles
+bafta_movie <- as.data.frame(bafta_data$pictures, stringsAsFactors = FALSE)
+names(bafta_movie)[names(bafta_movie)=="bafta_data$pictures"] <- "film_title"  ## rename column to match EEP design
+```
+
+### Join Oscar and bafta films
+```{r}
+oscar_and_bafta_movies <- dplyr::full_join(oscar_movie, bafta_movie, by = "film_title")
+```
+
+
+### Work on list of SDFilm films
+```{r}
+sdfilm_data <- read.csv("https://raw.githubusercontent.com/pm0kjp/IS607_Project3/master/data/SDFilmAwards.csv", stringsAsFactors = FALSE)
+sdfilm_data$Movie[] <- trimws(sdfilm_data$Movie[]) ##get rid of white spaces at end that cause duplicates
+
+## Create data frame with film titles
+sdfilm_movie <- as.data.frame(sdfilm_data$Movie, stringsAsFactors = FALSE)
+sdfilm_movie <- distinct(sdfilm_movie) # elimininate copies of the same movie
+names(sdfilm_movie)[names(sdfilm_movie)=="sdfilm_data$Movie"] <- "film_title"  ## rename column to match EEP design
+```
+
+### Complete Film
+Join SDfilm movies with previously joined Oscar and bafta films to create Film Table for database, then add film id to the data frame
+```{r}
+## join data frames
+Film <- dplyr::full_join(oscar_and_bafta_movies, sdfilm_movie, by = "film_title")
+
+## Attach column for film id
+Film$film_id <- 1 ## Add column
+Film$film_id <-seq.int(nrow(Film)) ## fill with category id integers
+
+## Change the order of columns to match plan for database entry
+Film <- Film[, c(2,1)]
+
+head(Film)
+```
+Film data frame complete
+
+create Film.csv file to be used for upload to MySQL database
+```{r}
+##  This creates the file in my working directory.  A copy of the file to is uploaded to Github to be accessible for database upload
+write.csv(Film, file = "D:/IS607Workspace/Film.csv",row.names=FALSE)
+```
+
+
+### Work on Oscar_Award_Category dataframe
+```{r}
+## Separate out the awards
+## Extract Award names
+award_category_name <- colnames(oscar_data) ## name so column will match EEP design
+award_category_name <-award_category_name[4:22]
+Oscar_Award_Category <- as.data.frame(award_category_name, stringsAsFactors = FALSE)
+
+Oscar_Award_Category$award_category_id <- 1 ## Add column
+Oscar_Award_Category$award_category_id <-seq.int(nrow(Oscar_Award_Category)) ## fill with category id integers
+
+head(Oscar_Award_Category)
+```
+Oscar_Award_Category data frame complete
+
+create Oscar_Award_Category.csv file to be used for upload to MySQL database
+```{r}
+##  This creates the file on my working directory.  I will upload a copy of the file to the Github repository https://github.com/pm0kjp/IS607_Project3/tree/master/data to be accessible for database upload
+write.csv(Oscar_Award_Category, file = "D:/IS607Workspace/Oscar_Award_Category.csv",row.names=FALSE)
+```
+
+
+### Work on Oscar_Award_Type data frame
+```{r}
+oscar_award_type_id <- c(1, 2)
+oscar_award_type_name <- c("Winner", "Nominee" )
+Oscar_Award_Type <- as.data.frame(cbind(oscar_award_type_id, oscar_award_type_name))
+
+head(Oscar_Award_Type)
+```
+Oscar_Award_Type data frame complete
+
+Oscar_Award_Type_Category.csv file to be used for upload to MySQL database
+```{r}
+##  This creates the file in my working directory.  A copy of the file to is uploaded to Github to be accessible for database upload
+write.csv(Oscar_Award_Type, file = "D:/IS607Workspace/Oscar_Award_Type.csv",row.names=FALSE)
+```
+
+
+### Work on Film_Oscar_Award dataframe
+```{r}
+Film_Oscar_Award <- oscar_data
+
+## Change Column names to use those planned for database film_oscar_award_id, film_id and convert category_name into category_id 
+names(Film_Oscar_Award) <- c("film_oscar_award_id", "year", "film_id", 1:19)
+
+## Convert film titles to film_id
+Film_Oscar_Award$film_id <- c(1:nrow(Film_Oscar_Award))
+
+## Gather into long format as expected by database
+Film_Oscar_Award <- gather(Film_Oscar_Award, "oscar_award_category_id", "oscar_award_type_id", 4:22)
+
+## Keep only those movies and awards for which they won or were nominated
+Film_Oscar_Award <- filter(Film_Oscar_Award, oscar_award_type_id > 0)
+
+## Convert variable type to integer as planned for database
+Film_Oscar_Award$oscar_award_category_id <- as.integer(Film_Oscar_Award$oscar_award_category_id)
+
+## Order by film id then by award category id
+Film_Oscar_Award <- arrange(Film_Oscar_Award,film_id,oscar_award_category_id)
+
+## Create unique ids for each entry in the table
+Film_Oscar_Award$film_oscar_award_id <- c(1:nrow(Film_Oscar_Award))
+
+## Change the order of columns to match plan for database entry
+Film_Oscar_Award <- Film_Oscar_Award[, c(1,2,3,5,4)]
+
+head(Film_Oscar_Award)
+```
+
+
+create Film_Oscar_Award.csv file to be used for upload to MySQL database
+```{r}
+##  This creates the file in my working directory.  A copy of the file to is uploaded to Github to be accessible for database upload
+write.csv(Film_Oscar_Award, file = "D:/IS607Workspace/Film_Oscar_Award.csv",row.names=FALSE)
+```
+
+### Conclusion
+This code uses the data provided by the team that did web scraping and data cleanup to reproducibly create 4 of the .csv files to be imported into the MySQL database. If you wish to reproduce it, please be sute to change the directory for saving the .csv files in the 4 appropriate sections.
+
