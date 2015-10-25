@@ -1,7 +1,7 @@
 ---
-title: "Project 3: Oscar Wins Charts"
+title: 'Project 3: Oscar Wins & Nominations Charts'
 author: "Skrelja"
-date: "October 23, 2015"
+date: "October 24, 2015"
 output: html_document
 ---
 
@@ -29,10 +29,10 @@ BP_BSG<-str_trim(oscar$Best_Picture)==str_trim(oscar$Best_Song)
 
 df<-data.frame(BP_BE,BP_BD,BP_BA,BP_BSA,BP_BAC,BP_BSAC,BP_BS,BP_BSG)  #Create dataframe of BP Overlaps
 
-count_doubles<-data.frame(names(df),apply(df,2,sum))   #Counts BP overlaps.
-names(count_doubles)<-c("Overlap","Count")
+count_doubles<-data.frame(names(df),colSums(df))   #Count BP overlaps.
+names(count_doubles)<-c("Overlap","Count")   #Rename column headings.
 
-ggplot(data=count_doubles,aes(x=Overlap,y=Count,fill=Overlap))+geom_bar(stat='identity')+ggtitle('Chart 1: BP overlaps most with BD, followed by BE and BA.')
+ggplot(data=count_doubles,aes(x=Overlap,y=Count,fill=Overlap))+geom_bar(stat='identity')+ggtitle('Chart 1: Best Picture Overlaps Most with Best Director, \nFollowed by Best Editor and Best Actor.')+scale_fill_discrete(name="Best Picture \nOverlaps With...",breaks=c("BP_BA","BP_BAC","BP_BD","BP_BE","BP_BS","BP_BSA","BP_BSAC","BP_BSG"),labels=c("Best Actor","Best Actress","Best Directing","Best Editing","Best Sound","Best Supporting Actor","Best Supporting Actress","Best Song"))+theme(legend.position="right", axis.text.x=element_text(angle=90, hjust=1))
 
 #CHART 2: BE Overlaps
 BE_BP<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Picture)
@@ -46,23 +46,23 @@ BE_BSG<-str_trim(oscar$Best_Editing)==str_trim(oscar$Best_Song)
 
 df2<-data.frame(BE_BP,BE_BD,BE_BA,BE_BSA,BE_BAC,BE_BSAC,BE_BS,BE_BSG)    #Create dataframe of BE Overlaps
 
-count_doubles2<-data.frame(names(df2),apply(df2,2,sum))  #Counts BE overlaps.
-names(count_doubles2)<-c("Overlap","Count")
+count_doubles2<-data.frame(names(df2),colSums(df2))  #Count BE overlaps.
+names(count_doubles2)<-c("Overlap","Count")     #Rename column headings.
 
-ggplot(data = count_doubles2,aes(x=Overlap,y=Count,fill=Overlap))+geom_bar(stat = 'identity')+ggtitle('Chart 2: BE overlaps most with BD, followed by BP and BS.')
+ggplot(data = count_doubles2,aes(x=Overlap,y=Count,fill=Overlap))+geom_bar(stat = 'identity')+ggtitle('Chart 2: Best Editor Overlaps Most with Best Director, \nFollowed by Best Picture and Best Sound')+scale_fill_discrete(name="Best Editor \nOverlaps With...",breaks=c("BE_BA","BE_BAC","BE_BD","BE_BP","BE_BS","BE_BSA","BE_BSAC","BE_BSG"),labels=c("Best Actor","Best Actress","Best Directing","Best Picture","Best Sound","Best Supporting Actor","Best Supporting Actress","Best Song"))+theme(legend.position="right", axis.text.x=element_text(angle=90, hjust=1))
 
 #CHART 3: BP Total Wins
-BP_totalwins<-data.frame(oscar$Year,apply(df,1,sum))   #Counts Total Wins
-names(BP_totalwins)<-c("Year","Wins")
+BP_totalwins<-data.frame(oscar$Year,rowSums(df))   #Count Total Wins.
+names(BP_totalwins)<-c("Year","Wins")      #Rename column headings.
 
-BP_totalwins$Wins<-BP_totalwins$Wins+1  #Adds back BP
+BP_totalwins$Wins<-BP_totalwins$Wins+1  #Adds back BP.
+mean(BP_totalwins$Wins)
 
-ggplot(data = BP_totalwins,aes(x=Year,y=Wins))+geom_bar(stat = 'identity')+ggtitle('Chart 3: Total BP Awards; Averages 3.3 awards; Is BE one of them?')
+ggplot(data = BP_totalwins,aes(x=Year,y=Wins))+geom_bar(stat='identity')+ggtitle('Chart 3: Total Awards Won By The Best Picture; \nAverages 3.3 Awards Per Year; Is Best Editing one of them?')
 
 #CHART 4: Distribution of BP Total Wins
 
-hist(BP_totalwins$Wins,xlab="Number of Awards Per Year",main="Chart 4: Distribution of Total Awards Won By BP; Looks Normal.")
-summary(BP_totalwins$Wins)
+ggplot(BP_totalwins, aes(Wins)) + geom_histogram(fill="black", color="white",binwidth = .88) + theme_bw()+ggtitle('Chart 4: Distribution of Total Awards Won By The Best Picture; \nLooks Normal.')
 ```
 
 # OSCAR NOMINATIONS
@@ -99,11 +99,13 @@ overlap_counts<-data.frame(c('BP_LACTOR','BP_SACTOR','BP_LACTRESS','BP_SACTRESS'
                              'BP_CINEMA','BP_COSTUME','BP_DIRECTING','BP_FILMEDITING','BP_MAKEUP',
                              'BP_MUSICSCORE','BP_MUSICSONG','BP_SOUNDEDITING','BP_SOUNDMIXING','BP_VISUALEFF',
                              'BP_WRTG','BP_WRTGADPTSPLAY','BP_WRTGORIGSPLAY'),
-                           c(nrow(BP_LACTOR),nrow(BP_SACTOR),nrow(BP_LACTRESS),nrow(BP_SACTRESS),nrow(BP_ART),                                                                                   nrow(BP_CINEMA),nrow(BP_COSTUME),nrow(BP_DIRECTING),nrow(BP_FILMEDITING),nrow(BP_MAKEUP),
-                             nrow(BP_MUSICSCORE),nrow(BP_MUSICSONG),nrow(BP_SOUNDEDITING),nrow(BP_SOUNDMIXING),nrow(BP_VISUALEFF),
-                             nrow(BP_WRTG),nrow(BP_WRTGADPTSPLAY),nrow(BP_WRTGORIGSPLAY)))
+                           c(nrow(BP_LACTOR),nrow(BP_SACTOR),nrow(BP_LACTRESS),nrow(BP_SACTRESS),nrow(BP_ART),
+                             nrow(BP_CINEMA),nrow(BP_COSTUME),nrow(BP_DIRECTING),nrow(BP_FILMEDITING),
+                             nrow(BP_MAKEUP),nrow(BP_MUSICSCORE),nrow(BP_MUSICSONG),nrow(BP_SOUNDEDITING),
+                             nrow(BP_SOUNDMIXING),nrow(BP_VISUALEFF),nrow(BP_WRTG),nrow(BP_WRTGADPTSPLAY),
+                             nrow(BP_WRTGORIGSPLAY)))
 
-names(overlap_counts)<-c('Overlap','Counts')
+names(overlap_counts)<-c('Overlap','Counts')   #Rename column headings.
 
-ggplot(data=overlap_counts,aes(x=Overlap,y=Counts,fill=Overlap))+geom_bar(stat = 'identity')+ggtitle('Chart 5: BP Overlaps Most with Noms for Directing, Editing and Lead Actor')+theme(legend.position="none", axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(data=overlap_counts,aes(x=Overlap,y=Counts,fill=Overlap))+geom_bar(stat = 'identity')+ggtitle('Chart 5: Best Picture Overlaps Most with Nominations \nfor Directing, Writing and Film Editing')+theme(legend.position="none", axis.text.x = element_text(angle = 90, hjust = 1))
 ```

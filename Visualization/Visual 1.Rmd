@@ -73,7 +73,7 @@ Oscar_table2 <- read.csv(file="https://raw.githubusercontent.com/pm0kjp/IS607_Pr
 ggplot(data = Oscar_table2, aes(y = Best_Editing, x = Best_Picture))+ geom_point(aes(color = Year)) + theme_igray() + ggtitle("Oscar's Winners Best Picture Vs Best Editing") + ylab("Won Best Editing Pictures") + xlab("Won Best Pictures") + theme(axis.text.x = element_blank(), axis.text.y = element_blank()) 
 
 #Scatter Plot2
-ggplot(data = Oscar_table2, aes(y = Best_Directing, x = Best_Picture))+ geom_point(aes(color = Year)) + theme_igray() + ggtitle("Oscar's Winners Best Picture Vs Best Directing") + ylab("Won Best Directing Pictures") + xlab("Won Best Pictures") + scale_y_discrete(labels=abbreviate) + scale_x_discrete(labels=abbreviate) + theme(axis.text.x= element_text(angle=90)) 
+ggplot(data = Oscar_table2, aes(y = Best_Directing, x = Best_Picture))+ geom_point(aes(color = Year)) + theme_igray() + ggtitle("Oscar's Winners Best Picture Vs Best Directing") + ylab("Won Best Directing Pictures") + xlab("Won Best Pictures") + theme(axis.text.x = element_blank(), axis.text.y = element_blank())  
 
 ```
 
