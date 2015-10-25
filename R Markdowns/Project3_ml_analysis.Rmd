@@ -11,7 +11,7 @@ This is a group project and we use Oscar Academy Awards data to determine whethe
 
 ### Data set
 
-The input data is from [link](https://github.com/aagoldberg/IS607/blob/master/tidedoscarwinners.csv). The 1's indicate winning the award, 0's indicate not winning.
+The input data is from [link](https://github.com/pm0kjp/IS607_Project3/blob/master/data/tidy_oscar_winners.csv). The 1's indicate winning the award, 0's indicate not winning.
 
 ### Techniques Used
 1. Random Rorests
@@ -22,7 +22,7 @@ The input data is from [link](https://github.com/aagoldberg/IS607/blob/master/ti
 
 ```{r}
 library(XML)
-oscar_data <- readHTMLTable('tidedoscarwinners.csv.html')
+oscar_data <- readHTMLTable('tidy_oscar_winners.csv.html')
 oscar_data <- oscar_data[[1]]
 head(oscar_data)
 ```
