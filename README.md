@@ -25,11 +25,11 @@ Research into the history and methods of the Oscars allowed us to create an [Aca
 - [Data showing which awards were given out in which years](Academy%20Award%20Metadata/Film_Oscar_Award.csv)
 - A [list of levels of recognition](Academy%20Award%20Metadata/Oscar_Award_Type.csv)
 
-Screen-scraping methods using R libraries were used, including the following scripts:
-- BAFTA(https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film) and PGA Award (https://en.wikipedia.org/wiki/Producers_Guild_of_America_Award) information was originally manually scaped from the referenced pages.
-- Add your data and info about screen scraping here!
-- More scripts about screen scraping here.
-- Create a folder and add your scripts!
+Data Acquisition was largely from pre-existing tabular databases:
+- [http://awardsdatabase.oscars.org/ampas_awards/BasicSearchInput.jsp](http://awardsdatabase.oscars.org/ampas_awards/BasicSearchInput.jsp)
+- [https://www.aggdata.com/awards/oscar](https://www.aggdata.com/awards/oscar)
+- BAFTA(https://en.wikipedia.org/wiki/BAFTA_Award_for_Best_Film) and PGA Award (https://en.wikipedia.org/wiki/Producers_Guild_of_America_Award) information was manually scraped
+- Scripted page scraping was determined to be a counter-productive method due to page timeout issues
 
 This resulted in untidy .csv files, found in the [Untidy Data](Untidy%20Data) Folder:
 - [Oscar results up to 2010](Untidy%20Data/unclean_2010.csv)
