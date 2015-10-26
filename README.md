@@ -36,12 +36,12 @@ This resulted in untidy .csv files, found in the [Untidy Data](Untidy%20Data) Fo
 - [2011-2014 Oscar results](Untidy%20Data/unclean_2014.csv)
 
 The above data was then tidied ith the following code: 
--[Cleaning and Combining](IS607_Project3/Munging Scripts/Extraction data.R)
--[Gathering and Spreading](IS607_Project3/Munging Scripts/IS607P3 CombOscar Winner Munge AG.R)
+- [Cleaning and Combining](IS607_Project3/Munging Scripts/Extraction data.R)
+- [Gathering and Spreading](IS607_Project3/Munging Scripts/IS607P3 CombOscar Winner Munge AG.R)
 
 Which resulted in the combined datasets:
--[Cleaned and Extracted Data](IS607_Project3/data/Oscar_data.csv)
--[ML Gathered and Tidied Data](IS607_Project3/data/tidyoscarnoms.csv)
+- [Cleaned and Extracted Data](data/Oscar_data.csv)
+- [ML Gathered and Tidied Data](data/tidyoscarnoms.csv)
 
 R libraries including dplyr and tidyr were used to create tidying scripts and tidy data:
 - [San Diego Film Awards](data/tidysdfcsawinners.csv)
